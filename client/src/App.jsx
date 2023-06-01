@@ -1,11 +1,16 @@
 import "./App.css";
 import TextEditor from "./components/textEditor";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./components/homePage";
 
 function App() {
   return (
-    <div className="container">
-      <TextEditor />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:docId" element={<TextEditor />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -12,6 +12,17 @@ const TextEditor = () => {
     const quill = new Quill(editor, { theme: "snow" });
     quill.on("text-change", (delta, oldDelta, source) => {
       console.log({ delta, oldDelta, source });
+      fetch(`http://localhost:4001${window.location.pathname}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          delta,
+          oldDelta,
+          source,
+        }),
+      });
     });
   }, []);
 
