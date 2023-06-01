@@ -1,0 +1,10 @@
+.textEditor {
+  height: 100%;
+  width: 50%;
+  font-size: clamp(0.5rem, 1vw + 1rem, 3rem);
+  padding: 20px 10px;
+  outline: none;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  resize: none;
+}
