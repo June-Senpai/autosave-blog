@@ -1,13 +1,89 @@
 .home-container {
   height: 100vh;
   display: grid;
-  place-items: center;
+  place-content: center;
+  justify-items: center;
 }
 
 .create-doc-btn {
   border-radius: 15px;
   font-size: 30px;
-  border: 5px cornflowerblue solid;
+  border: 5px rgb(0, 0, 0) solid;
   background-color: white;
   cursor: pointer;
+  transition: scale 500ms;
+  padding: 15px;
+}
+
+.create-doc-btn:active {
+  background-color: aliceblue;
+}
+
+.create-doc-btn:hover {
+  scale: 1.2;
+  border-color: cornflowerblue;
+}
+
+.doc-list-item {
+  list-style: none;
+  padding: 10px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  border: 2px rgb(0, 0, 0) solid;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  transition: border 300ms;
+}
+
+.doc-list-item:hover {
+  border: 2px cornflowerblue solid;
+  background-color: aliceblue;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.recent-docs-container {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: 0.9s ease-in-out;
+  width: fit-content;
+}
+
+.recent-docs-container > div {
+  overflow-y: hidden;
+  overflow-x: visible;
+}
+
+.recent-docs:hover .recent-docs-container {
+  grid-template-rows: 1fr;
+}
+
+.recent-docs:hover svg {
+  rotate: 180deg;
+}
+
+.recent-docs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: fit-content; */
+}
+
+.recent-docs-header svg {
+  height: 20px;
+  width: 40px;
+  transition: rotate 500ms;
+}
+
+.recent-docs {
+  /* background-color: aliceblue; */
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 1px solid;
 }
