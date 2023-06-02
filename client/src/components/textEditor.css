@@ -8,3 +8,35 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   resize: none;
 }
+
+.title-bar {
+  position: absolute;
+  top: 0;
+  width: fit-content;
+  padding: 3px;
+}
+
+.title-bar input {
+  width: 95px;
+  border: none;
+  padding: 5px;
+  font-size: larger;
+}
+
+.delete {
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  color: red;
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: larger;
+}
+
+.delete:hover {
+  font-weight: 600;
+}

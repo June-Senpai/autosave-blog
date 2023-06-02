@@ -3,13 +3,15 @@ import "./homePage.css";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  const [docIds, setDocIds] = useState([]);
+  const [docData, setDocData] = useState([]);
   const navigator = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:4001/")
       .then((res) => res.json())
-      .then((data) => setDocIds(data?.docIds));
+      .then((data) => {
+        setDocData(data?.docData);
+      });
   }, []);
 
   const onClickCreateDoc = () => {
@@ -20,6 +22,20 @@ const HomePage = () => {
 
   const onClickDocId = (docId) => {
     navigator(`/${docId}`);
+  };
+
+  const onDeleteDoc = (docId) => {
+    fetch(`http://localhost:4001/${docId}/delete`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log({ data, docData });
+        if (data?.acknowledged) {
+          setDocData(docData.filter((doc) => doc.docId !== docId));
+        }
+      });
+    navigator("/");
   };
 
   return (
@@ -37,13 +53,25 @@ const HomePage = () => {
         <div className="recent-docs-container">
           <div>
             <ul>
-              {docIds.map((docId) => (
-                <li
-                  className="doc-list-item"
-                  onClick={() => onClickDocId(docId)}
-                  key={docId}
-                >
-                  {docId}
+              {docData.map(({ docId, docName = null }) => (
+                <li className="doc-list-item" key={docId}>
+                  {docName === "Untitled" || docName === null ? docId : docName}
+
+                  <div className="doc-list-item-btns">
+                    <button
+                      className="open-doc-btn"
+                      onClick={() => onClickDocId(docId)}
+                    >
+                      Open
+                    </button>
+
+                    <button
+                      className="delete-doc-btn"
+                      onClick={() => onDeleteDoc(docId)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
