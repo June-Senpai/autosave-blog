@@ -10,11 +10,13 @@ const HomePage = () => {
   const navigator = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${import.meta.env.VITE_BACKEND_URL}`)
       .then((res) => res.json())
       .then((data) => {
         //docData contains docId and docName
         setDocData(data?.docData);
+        setIsLoading(false);
       });
   }, []);
 
