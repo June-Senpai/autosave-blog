@@ -1,12 +1,22 @@
-.textEditor {
-  height: 100%;
+.container .ql-editor {
   width: 50%;
-  font-size: clamp(0.5rem, 1vw + 1rem, 3rem);
-  padding: 20px 10px;
-  outline: none;
-  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1200px;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  resize: none;
+}
+
+.container .ql-container {
+  background-color: hsl(0, 0%, 88%);
+  padding-top: 20px;
+  overflow: scroll;
+}
+
+.container .ql-toolbar {
+  display: flex;
+  justify-content: center;
+  z-index: 10;
 }
 
 .title-bar {
@@ -14,13 +24,6 @@
   top: 0;
   width: fit-content;
   padding: 3px;
-}
-
-.title-bar input {
-  width: 95px;
-  border: none;
-  padding: 5px;
-  font-size: larger;
 }
 
 .delete {

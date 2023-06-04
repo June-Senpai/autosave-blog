@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
-import "./homePage.css";
+import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const HomePage = () => {
   const [docData, setDocData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigator = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:4001/")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}`)
       .then((res) => res.json())
       .then((data) => {
+        //docData contains docId and docName
         setDocData(data?.docData);
       });
   }, []);
 
   const onClickCreateDoc = () => {
-    fetch("http://localhost:4001/create")
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/create`)
       .then((res) => res.json())
       .then((data) => navigator(`/${data.docId}`));
   };
@@ -25,14 +29,16 @@ const HomePage = () => {
   };
 
   const onDeleteDoc = (docId) => {
-    fetch(`http://localhost:4001/${docId}/delete`, {
+    setIsLoading(true);
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/${docId}/delete`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log({ data, docData });
+        // acknowledged is true if doc is deleted
         if (data?.acknowledged) {
           setDocData(docData.filter((doc) => doc.docId !== docId));
+          setIsLoading(false);
         }
       });
     navigator("/");
@@ -55,18 +61,17 @@ const HomePage = () => {
             <ul>
               {docData.map(({ docId, docName = null }) => (
                 <li className="doc-list-item" key={docId}>
+                  {/* show docName if it is not null or Untitled  */}
                   {docName === "Untitled" || docName === null ? docId : docName}
-
                   <div className="doc-list-item-btns">
                     <button
-                      className="open-doc-btn"
+                      className="doc-item-action-btn open-doc-btn"
                       onClick={() => onClickDocId(docId)}
                     >
                       Open
                     </button>
-
                     <button
-                      className="delete-doc-btn"
+                      className="doc-item-action-btn delete-doc-btn"
                       onClick={() => onDeleteDoc(docId)}
                     >
                       Delete
@@ -78,6 +83,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      {isLoading ? <Loader size={10} hasOverlay={true} /> : null}
     </div>
   );
 };

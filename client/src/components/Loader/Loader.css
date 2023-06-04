@@ -1,0 +1,17 @@
+.loader-container {
+  display: grid;
+  place-items: center;
+}
+
+.loader-container svg {
+  animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}

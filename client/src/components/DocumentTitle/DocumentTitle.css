@@ -1,0 +1,12 @@
+.input-container input {
+  width: 95px;
+  border: none;
+  padding: 5px;
+  font-size: larger;
+}
+
+.input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
